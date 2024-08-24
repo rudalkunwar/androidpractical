@@ -1,1 +1,96 @@
 6. Android program to compute simple interest.
+
+//main_activity_q6.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/principal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Principal Amount"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/rate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Rate of Interest (%)"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Time Period (years)"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/calculate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calculate Interest" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
+
+
+//java 
+//MainActivityq6.java
+
+package com.example.myapp;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivityq6 extends AppCompatActivity {
+
+    private EditText principalEditText;
+    private EditText rateEditText;
+    private EditText timeEditText;
+    private TextView resultTextView;
+    private Button calculateButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_activity_q6);
+
+        principalEditText = findViewById(R.id.principal);
+        rateEditText = findViewById(R.id.rate);
+        timeEditText = findViewById(R.id.time);
+        resultTextView = findViewById(R.id.result);
+        calculateButton = findViewById(R.id.calculate);
+
+        calculateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculateSimpleInterest();
+            }
+        });
+    }
+
+    private void calculateSimpleInterest() {
+        try {
+            double principal = Double.parseDouble(principalEditText.getText().toString());
+            double rate = Double.parseDouble(rateEditText.getText().toString());
+            double time = Double.parseDouble(timeEditText.getText().toString());
+
+            double simpleInterest = (principal * rate * time) / 100;
+            resultTextView.setText("Simple Interest: " + simpleInterest);
+        } catch (NumberFormatException e) {
+            resultTextView.setText("Please enter valid numbers");
+        }
+    }
+}

@@ -1,1 +1,91 @@
 8. Android program to compute the whether number is prime or composite.
+
+//main_activity_q8.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter a number"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check if Prime" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
+//java
+//MainActivityq8.java
+
+package com.example.myapp;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivityq8 extends AppCompatActivity {
+
+    private EditText numberEditText;
+    private TextView resultTextView;
+    private Button checkButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_activity_q8);
+
+        numberEditText = findViewById(R.id.number);
+        resultTextView = findViewById(R.id.result);
+        checkButton = findViewById(R.id.check);
+
+        checkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkPrime();
+            }
+        });
+    }
+
+    private void checkPrime() {
+        try {
+            int number = Integer.parseInt(numberEditText.getText().toString());
+
+            if (number <= 1) {
+                resultTextView.setText("Enter a number greater than 1");
+                return;
+            }
+
+            boolean isPrime = true;
+
+            for (int i = 2; i <= Math.sqrt(number); i++) {
+                if (number % i == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+
+            if (isPrime) {
+                resultTextView.setText(number + " is a Prime Number");
+            } else {
+                resultTextView.setText(number + " is a Composite Number");
+            }
+        } catch (NumberFormatException e) {
+            resultTextView.setText("Please enter a valid number");
+        }
+    }
+}

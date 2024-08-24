@@ -1,1 +1,60 @@
 9. Android program to pass the content from one activity to another.
+
+//main_activity_q9.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/inputEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter a message" />
+
+    <Button
+        android:id="@+id/sendButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send Message" />
+</LinearLayout>
+
+//java
+//MainActivityq9.java
+
+package com.example.myapp;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivityq9 extends AppCompatActivity {
+
+    private EditText inputEditText;
+    private Button sendButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_activity_q9);
+
+        inputEditText = findViewById(R.id.inputEditText);
+        sendButton = findViewById(R.id.sendButton);
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String message = inputEditText.getText().toString();
+
+                Intent intent = new Intent(MainActivityq20.this, SecondActivityq20.class);
+                intent.putExtra("EXTRA_MESSAGE", message);
+                startActivity(intent);
+            }
+        });
+    }
+}

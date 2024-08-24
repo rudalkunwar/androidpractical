@@ -1,1 +1,87 @@
 7. Android program to compute the factorial.
+
+//main_activity_q7.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter a number"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/calculate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calculate Factorial" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
+
+
+//java
+//MainActivityq7.java
+
+package com.example.myapp;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.*;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivityq7 extends AppCompatActivity {
+
+    private EditText numberEditText;
+    private TextView resultTextView;
+    private Button calculateButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_activity_q7);
+
+        numberEditText = findViewById(R.id.number);
+        resultTextView = findViewById(R.id.result);
+        calculateButton = findViewById(R.id.calculate);
+
+        calculateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculateFactorial();
+            }
+        });
+    }
+
+    private void calculateFactorial() {
+        try {
+            int number = Integer.parseInt(numberEditText.getText().toString());
+
+            if (number < 0) {
+                resultTextView.setText("Please enter a non-negative number");
+                return;
+            }
+
+            long factorial = 1;
+            for (int i = 1; i <= number; i++) {
+                factorial *= i;
+            }
+
+            resultTextView.setText("Factorial: " + factorial);
+        } catch (NumberFormatException e) {
+            resultTextView.setText("Please enter a valid number");
+        }
+    }
+}
