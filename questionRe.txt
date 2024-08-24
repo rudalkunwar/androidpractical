@@ -1,0 +1,38 @@
+Affiliated To TU 
+Sungava College 
+Khairani, Parsa 
+ 
+LAB TASK for Mobile programming 
+ 
+1. Setting up first android program displaying your name. 
+2. Android program to design UI for student registration (name, address, faculty[spinner], hobby[checkbox], gender[radio]) using Linear layout. 
+3. Android program to design UI for student registration (name, address, faculty[spinner], hobby[checkbox], gender[radio]) using relative layout. 
+4. Android program to design UI for student registration (name, address, faculty[spinner], hobby[checkbox], gender[radio]) using constraint layout.
+ 
+ 
+
+
+5. Android program to pass the content from one activity to another and then return back to previous activity. 
+6. Android program to demonstrate fragment. 
+7. Android program to compute sum of n natural number in fragment. 
+8. Android program to demonstrate fragment transaction. 
+9. Android program to demonstrate the option menu. 
+10. Android program to demonstrate the context menu. 
+11. Android program to demonstrate the popup menu. 
+12. Android program to demonstrate the custom dialog. 
+13. Android program to demonstrate ListView. 
+14. Android program to demonstrate Gridview. 
+14. Android program to demonstrate RecyclerView. 
+
+
+5. Android program to demonstrate the table layout. 
+6. Android program to compute simple interest. 
+7. Android program to compute the factorial. 
+8. Android program to compute the whether number is prime or composite. 
+9. Android program to pass the content from one activity to another.
+
+
+21. Android program to perform CRUD operation for student registration and display the list of student using ListView. 
+22. Android program to demonstrate the connection to remote server. 
+23. Android program to demonstrate the map in an application. 
+
