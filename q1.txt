@@ -1,3 +1,4 @@
+1.Setting up first android program displaying your name.
 //layout main_activity_q1.xml
 
 <?xml version="1.0" encoding="UTF-8"?>

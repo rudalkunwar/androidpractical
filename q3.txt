@@ -1,0 +1,2 @@
+3. Android program to design UI for student registration (name, address, faculty[spinner],
+hobby[checkbox], gender[radio]) using relative layout.
