@@ -1,1 +1,105 @@
 19. Android program to demonstrate Gridview.
+
+//main_activity_q19.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <GridView
+        android:id="@+id/grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnWidth="100dp"
+        android:gravity="center"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:padding="8dp" />
+
+</LinearLayout>
+
+//MainActivityq19.java
+
+package com.example.myapp;
+
+import android.os.Bundle;
+import android.widget.GridView;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivityq19 extends AppCompatActivity {
+
+    private GridView gridView;
+    private String[] items = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6"};
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_activity_q19);
+
+        gridView = findViewById(R.id.grid_view);
+        GridAdapter adapter = new GridAdapter(this, items);
+        gridView.setAdapter(adapter);
+
+        gridView.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedItem = items[position];
+            Toast.makeText(MainActivityq19.this, "Clicked: " + selectedItem, Toast.LENGTH_SHORT).show();
+        });
+    }
+}
+
+//grid_item.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/grid_item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_light"
+        android:padding="16dp"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+
+</FrameLayout>
+
+//GridAdapter.java
+
+package com.example.myapp;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+public class GridAdapter extends ArrayAdapter<String> {
+
+    private final Context context;
+    private final String[] values;
+
+    public GridAdapter(Context context, String[] values) {
+        super(context, R.layout.grid_item, values);
+        this.context = context;
+        this.values = values;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View gridView = inflater.inflate(R.layout.grid_item, parent, false);
+        TextView textView = gridView.findViewById(R.id.grid_item_text);
+        textView.setText(values[position]);
+        return gridView;
+    }
+}
