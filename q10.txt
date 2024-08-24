@@ -1,0 +1,2 @@
+10. Android program to pass the content from one activity to another and then return back to
+previous activity.
