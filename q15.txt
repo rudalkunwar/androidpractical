@@ -1,1 +1,96 @@
 15. Android program to demonstrate the context menu.
+
+//main_activity_q15.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Long press me for context menu"
+        android:textSize="24sp" />
+
+</LinearLayout>
+
+
+//MainActivityq15.java
+
+package com.example.myapp;
+
+import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivityq15 extends AppCompatActivity {
+
+    private Button bt;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_activity_q15);
+
+        bt = findViewById(R.id.btn);
+        registerForContextMenu(bt);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_edit:
+                Toast.makeText(this, "Edit selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menu_delete:
+                Toast.makeText(this, "Delete selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menu_share:
+                Toast.makeText(this, "Share selected", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+}
+
+//layout/menu/context_menu.xml
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_edit"
+        android:title="Edit"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_delete"
+        android:title="Delete"
+        android:orderInCategory="200"
+        android:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_share"
+        android:title="Share"
+        android:orderInCategory="300"
+        android:showAsAction="never" />
+
+</menu>

@@ -1,1 +1,106 @@
 18. Android program to demonstrate ListView.
+
+//main_activity_q18.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
+
+
+//MainActivityq18.java
+
+package com.example.myapp;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivityq18 extends AppCompatActivity {
+
+    private ListView listView;
+    private String[] items = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_activity_q18);
+
+        listView = findViewById(R.id.list_view);
+
+        // Use the custom adapter
+        CustomAdapter adapter = new CustomAdapter(this, items);
+        listView.setAdapter(adapter);
+
+        // Set an item click listener
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItem = items[position];
+                Toast.makeText(MainActivityq18.this, "Clicked: " + selectedItem, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}
+
+//list_item.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp" />
+
+</LinearLayout>
+
+
+//CustomAdapter.java
+
+package com.example.myapp;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+public class CustomAdapter extends ArrayAdapter<String> {
+
+    private final Context context;
+    private final String[] values;
+
+    public CustomAdapter(Context context, String[] values) {
+        super(context, R.layout.list_item, values);
+        this.context = context;
+        this.values = values;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View rowView = inflater.inflate(R.layout.list_item, parent, false);
+        TextView textView = rowView.findViewById(R.id.item_text);
+        textView.setText(values[position]);
+        return rowView;
+    }
+}
