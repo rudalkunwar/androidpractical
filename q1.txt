@@ -7,18 +7,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Rojina Sapkota"
         android:textSize="40dp"
         />
-
-
 </LinearLayout>
 
 //java 
+MainActivityq1.java
 package com.example.myapp;
 
 import android.app.Activity;
