@@ -1,4 +1,4 @@
-//layout main_activity_q1
+//layout main_activity_q1.xml
 
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout
@@ -16,7 +16,7 @@
 </LinearLayout>
 
 //java 
-MainActivityq1.java
+//MainActivityq1.java
 package com.example.myapp;
 
 import android.app.Activity;
