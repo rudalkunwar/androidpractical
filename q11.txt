@@ -1,1 +1,121 @@
 11. Android program to demonstrate fragment.
+
+//fragment_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <FrameLayout
+        android:id="@+id/fragment_container1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginEnd="8dp" />
+
+    <FrameLayout
+        android:id="@+id/fragment_container2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginStart="8dp" />
+
+</LinearLayout>
+
+
+//MainActivity11
+package com.example.myapp;
+
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivityq11 extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_main);
+
+        if (savedInstanceState == null) {
+            // Add the fragments to the layout
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container1, new Fragment1())
+                    .replace(R.id.fragment_container2, new Fragment2())
+                    .commit();
+        }
+    }
+}
+
+//fragment_1.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is Fragment 1"
+        android:textSize="24sp" />
+
+</LinearLayout>
+
+//java
+//Fragment1.java
+package com.example.myapp;
+
+import android.os.Bundle;
+import android.view.*;
+import androidx.fragment.app.Fragment;
+
+public class Fragment1 extends Fragment {
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_1, container, false);
+    }
+}
+
+
+
+//fragment_2.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is Fragment 2"
+        android:textSize="24sp" />
+
+</LinearLayout>
+//java
+//Fragment2.java
+
+package com.example.myapp;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.fragment.app.Fragment;
+
+public class Fragment2 extends Fragment {
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_2, container, false);
+    }
+}

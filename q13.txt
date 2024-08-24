@@ -1,1 +1,136 @@
 13. Android program to demonstrate fragment transaction.
+
+//main_activity_q13.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/button_fragment1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Load Fragment 1" />
+
+    <Button
+        android:id="@+id/button_fragment2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Load Fragment 2"
+        android:layout_marginTop="16dp" />
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>
+
+//MainActivityq13.java
+
+package com.example.myapp;
+
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+public class MainActivityq13 extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_activity_q13);
+
+        findViewById(R.id.button_fragment1).setOnClickListener(v -> loadFragment(new Fragment1()));
+        findViewById(R.id.button_fragment2).setOnClickListener(v -> loadFragment(new Fragment2()));
+
+        // Load initial fragment
+        if (savedInstanceState == null) {
+            loadFragment(new Fragment1());
+        }
+    }
+
+    private void loadFragment(Fragment fragment) {
+        getSupportFragmentManager()
+            .beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit();
+    }
+}
+
+
+//fragment_1.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is Fragment 1"
+        android:textSize="24sp" />
+
+</LinearLayout>
+
+//java
+//Fragment1.java
+package com.example.myapp;
+
+import android.os.Bundle;
+import android.view.*;
+import androidx.fragment.app.Fragment;
+
+public class Fragment1 extends Fragment {
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_1, container, false);
+    }
+}
+
+
+
+//fragment_2.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is Fragment 2"
+        android:textSize="24sp" />
+
+</LinearLayout>
+//java
+//Fragment2.java
+
+package com.example.myapp;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.fragment.app.Fragment;
+
+public class Fragment2 extends Fragment {
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_2, container, false);
+    }
+}
