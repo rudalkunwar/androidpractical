@@ -1,1 +1,64 @@
-22. Android program to demonstrate the connection to remote server.
+22. Android program to decode the json data .
+
+//main_acitvity 
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+//MainActivity.java
+package com.nischal.jsonreader;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        try {
+            decodeJson();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    void decodeJson() throws JSONException {
+        String jsondata="{\"user\":[{\"id\":\"1\",\"name\":\"nischal\",\"address\":\"tandi\"},{\"id\":\"2\",\"name\":\"nabin\",\"address\":\"bharatpur\"}]}";
+        JSONObject jObject = new JSONObject(jsondata);
+        JSONArray ar=jObject.getJSONArray("user");
+        for(int i=0;i<ar.length();i++){
+
+            JSONObject oneObject =  ar.getJSONObject(i);;
+            // Pulling items from the array
+            int id = oneObject.getInt("id");
+            String name = oneObject.getString("name");
+            String address= oneObject.getString("address");
+            Log.d("row "+i, id+" "+ name+ " "+ address );
+        }
+
+    }
+}
